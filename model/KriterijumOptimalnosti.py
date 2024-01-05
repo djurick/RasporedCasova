@@ -1,7 +1,7 @@
 from .GlobalneKonstante import GlobalneKonstante
 
 class KriterijumOptimalnosti:
-    weights = [0.2, 0.2, 0.2, 0.2, 0.2, 0]
+    weights = [0,0,0,0,0]
 
     @staticmethod
     def isRoomOverlapped(slots, reservation, dur):

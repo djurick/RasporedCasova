@@ -4,7 +4,6 @@ class RezervacijaUcionice:
     NR = -1
     _reservationPool = {}
 
-
     def __init__(self, day: int, time: int, room: int):
         self.Day = day
         self.Time = time

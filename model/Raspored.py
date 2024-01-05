@@ -1,4 +1,4 @@
-from .GlobalneKonstante import GlobalneKonstante
+﻿from .GlobalneKonstante import GlobalneKonstante
 from .Cas import Cas 
 from .RezervacijaUcionice import RezervacijaUcionice
 from .KriterijumOptimalnosti import KriterijumOptimalnosti
@@ -9,6 +9,7 @@ import numpy as np
 
 class Raspored:
     def __init__(self, configuration):
+        self._dayWeights = [1, 1, 1, 1, 1, 0]
         self._configuration = configuration
         self._fitness = 0
 
@@ -46,8 +47,16 @@ class Raspored:
         DAYS_NUM, DAY_HOURS = GlobalneKonstante.DAYS_NUM, GlobalneKonstante.DAY_HOURS
         for c in classes:
             dur = c.Duration
+            
+            # Računanje ponderisane verovatnoće za svaki dan
+            weighted_days = list(range(DAYS_NUM))
+            weighted_probabilities = [self._dayWeights[day] for day in weighted_days]
+            total_weight = sum(weighted_probabilities)
+            probabilities = [weight / total_weight for weight in weighted_probabilities]
 
-            day = randrange(DAYS_NUM)
+            # Odabir dana na osnovu ponderisanih verovatnoća
+            day = np.random.choice(DAYS_NUM, p=probabilities)
+           # day = randrange(DAYS_NUM)
             room = randrange(nr)
             time = randrange(DAY_HOURS - dur)
             reservation = RezervacijaUcionice.getReservation(nr, day, time, room)
@@ -220,7 +229,14 @@ class Raspored:
 
         # determine position of class randomly
         if reservation2 is None:
-            day = randrange(DAYS_NUM)
+            weighted_days = list(range(DAYS_NUM))
+            weighted_probabilities = [self._dayWeights[day] for day in weighted_days]
+            total_weight = sum(weighted_probabilities)
+            probabilities = [weight / total_weight for weight in weighted_probabilities]
+
+            # Odabir dana na osnovu ponderisanih verovatnoća
+            day = np.random.choice(DAYS_NUM, p=probabilities)
+           # day = randrange(DAYS_NUM)
             room = randrange(nr)
             time = randrange(DAY_HOURS - dur)
             reservation2 = RezervacijaUcionice.getReservation(nr, day, time, room)

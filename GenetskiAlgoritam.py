@@ -3,13 +3,6 @@ import random
 from random import randrange
 from time import time
 
-
-# Lakshmi, R. et al. “A New Biological Operator in Genetic Algorithm for Class Scheduling Problem.” 
-# International Journal of Computer Applications 60 (2012): 6-11.
-# Copyright (c) 2020 - 2022 Miller Cy Chan
-
-
-# Genetic algorithm
 class GenetskiAlgoritam:
     def initAlgorithm(self, prototype, numberOfChromosomes=100, replaceByGeneration=8, trackBest=5):
         # Number of best chromosomes currently saved in best chromosome group
@@ -149,7 +142,7 @@ class GenetskiAlgoritam:
         return offspring
 
     # Starts and executes algorithm
-    def run(self, maxRepeat=9999, minFitness=0.99):
+    def run(self, maxRepeat=9999, minFitness=0.999):
         # clear best chromosome group from previous execution
         self.clearBest()
         length_chromosomes = len(self._chromosomes)
@@ -188,4 +181,4 @@ class GenetskiAlgoritam:
             currentGeneration += 1
 
     def __str__(self):
-        return ""
+        return " "
